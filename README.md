@@ -66,7 +66,7 @@ Data Source: Publicly available Fitbit data (via Kaggle)
 
 Technologies:
 
-Excel – Data cleaning and structuring [Download Data](https://www.kaggle.com/datasets/arashnic/fitbit)
+Excel – Data cleaning and structuring [Fitbit Health Data](https://www.kaggle.com/datasets/arashnic/fitbit)
 
 R – Data transformation, analysis, and visualization
 
