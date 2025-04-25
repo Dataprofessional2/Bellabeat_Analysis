@@ -11,8 +11,6 @@
 
 #GOOGLE-DATA-ANALYTICS
 
-"This repository contains projects and case studies related to the Google Data Analytics Certification. It includes data cleaning, analysis, visualization, and insights using tools like SQL, R, and Tableau. The goal is to apply real-world data analytics techniques to solve business problems and derive actionable insights."
-
 ## GOOGLE DATA ANALYTICS
 
 ## How Can a Wellness Technology Company Play It Smart?
@@ -43,76 +41,67 @@
 - Sedentary vs. Active Patterns
 
 
-Recommendations
-
-Product Feature Improvements
-
-Personalized Marketing Strategy
-
-Wellness-Focused Campaigns
-
-
-Conclusion
-
-Summary of Findings and Business Value
+-Recommendations
+- Product Feature Improvements
+- Personalized Marketing Strategy
+- Wellness-Focused Campaigns
+- Conclusion
+- Summary of Findings and Business Value
 
 
 
 
 ---
 
-Project Overview: Bellabeat Market Growth Strategy
+## Project Overview: Bellabeat Market Growth Strategy
 
 Client: Bellabeat – a wellness tech company focused on women’s health
 Challenge: Leverage smart device usage data to discover patterns and create a data-driven marketing strategy.
 
 Objective: Analyze Fitbit smart device data to understand user behavior and develop actionable insights to support Bellabeat's product and marketing decisions.
 
-
----
-
-Tools Used:
+Tools Used: Excel, R, SQL, Visualisations
 
 Data Source: Publicly available Fitbit data (via Kaggle)
 
 Technologies:
 
-Excel – Data cleaning and structuring
+Excel – Data cleaning and structuring [Download Data](https://www.kaggle.com/datasets/arashnic/fitbit)
 
 R – Data transformation, analysis, and visualization
 
 SQL – Filtering and querying datasets
 
-Tableau – Dashboard creation and data storytelling
+Tableau – Visualization creation and data storytelling
 
 
 
 ---
 
-Data Cleaning & Preparation
+### Data Cleaning & Preparation
 
-Performed the following key tasks:
+#### Performed the following key tasks:
 
-Loaded and inspected datasets: daily activity, heart rate, sleep, and hourly intensity
+- Loaded and inspected datasets: daily activity, heart rate, sleep, and hourly intensity
 
-Standardized date formats and column naming conventions
+- Standardized date formats and column naming conventions
 
-Removed or flagged outliers in heart rate and activity data
+- Removed or flagged outliers in Datasets
 
-Combined and joined datasets for comprehensive analysis
+- Combined and joined datasets for comprehensive analysis
 
 
 
----
 
-Exploratory Data Analysis (EDA)
 
-EDA focused on revealing user habits and smart device engagement:
+### Exploratory Data Analysis (EDA)
 
-What times of day and week show the most activity?
+- EDA focused on revealing user habits and smart device engagement:
 
-How do users differ in activity intensity, steps, and calories burned?
+- What times of day and week show the most activity?
 
-Is there a pattern between heart rate, movement, and sleep?
+- How do users differ in activity intensity, steps, and calories burned?
 
-Which users show consistent engagement or inactivity?
+- Is there a pattern between heart rate, movement, and sleep?
+
+- Which users show consistent engagement or inactivity?
