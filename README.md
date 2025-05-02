@@ -136,10 +136,134 @@ select count(distinct Id) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Int
 select count(Id) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity
 group by Activity_Time
 order by Activity_Time desc;
-SELECT 
+SELECT
   CAST(Activity_Time AS TIME) AS activity_time_casted,
   COUNT(Id) AS count
 FROM bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity
 GROUP BY activity_time_casted
 ORDER BY activity_time_casted DESC;
 ```
+
+```sql
+# Summary stats of weight log info table
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
+select cast(Time as time),Id from bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
+select avg(WeightKg) from bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
+SELECT AVG(BMI) FROM bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
+SELECT Max(BMI) FROM bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
+SELECT column_name
+FROM bellabeat-analysis-458115.BellaBeat_Data.INFORMATION_SCHEMA.COLUMNS
+WHERE table_name = 'Weight_Log_Info';
+select count(Id) from bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info
+group by IsmanualReport;
+```
+
+```sql
+# Summary Statistics from Hourly CAalorie Table
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Hourly_Calorie ;
+select max(Calories) from bellabeat-analysis-458115.BellaBeat_Data.Hourly_Calorie as max_calorie;
+select avg(Calories) from bellabeat-analysis-458115.BellaBeat_Data.Hourly_Calorie;
+SELECT 
+  *, 
+  CAST(Activity_Time AS TIME) AS activity_time_casted
+FROM bellabeat-analysis-458115.BellaBeat_Data.Hourly_Calorie
+WHERE Calories < 200
+ORDER BY activity_time_casted;
+```
+
+```sql
+# Summary statistics for Hourly Steps Table
+
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Hourly_Steps ;
+
+select avg(Step_Total) from bellabeat-analysis-458115.BellaBeat_Data.Hourly_Steps;
+
+select max(Step_Total) from bellabeat-analysis-458115.BellaBeat_Data.Hourly_Steps;
+
+select min(Step_Total) from bellabeat-analysis-458115.BellaBeat_Data.Hourly_Steps;
+
+select count(*),cast(Activity_Time as time ) as Casted_Time
+
+from bellabeat-analysis-458115.BellaBeat_Data.Hourly_Steps
+
+group by Casted_Time
+
+Order by Casted_Time;
+
+```
+```sql
+# Summary stats for minute sleep table
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep;
+select max(value) from bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep;
+select avg(value) from bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep;
+select count(distinct Id),
+cast(Time as time) 
+from bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep
+group by Time
+order by Time desc
+;
+```
+```sql
+# summary stats for daily_activities
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities;
+select max(Total_Steps) as maximum_step from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+select avg(Total_Steps) as avg_step from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+select max(Total_Distance) as maximum_dist from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+select avg(Total_Distance) as avg_dist from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+select max(Calories_Burned) as maximum_kcal from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+select avg(Calories_Burned) as avg_kcal from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+select (avg(Total_Steps)/avg(Calories_Burned)) from bellabeat-analysis-458115.BellaBeat_Data.daily_activities ;
+```
+
+```sql
+#Understanding who is more active and who is mostly sedentary.
+SELECT Id, AVG(Very_Active_Minutes) as avg_active_min, AVG(Sedentary_Minutes) as sed_min
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities
+GROUP BY Id;
+
+# Find how often users don't reach basic activity levels.
+SELECT Id, COUNT(*) AS LazyDays
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities
+WHERE Total_Steps < 5000
+GROUP BY Id;
+
+
+# Relationship Analysis
+#Steps vs. Calories Correlation 
+SELECT Total_Steps,Calories_Burned
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities;
+
+# Do more active users sleep better?
+SELECT da.Id,Very_Active_Minutes ,Sedentary_Minutes
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities as da
+JOIN 
+bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
+ON da.Id = ms.Id AND da.Activity_Date = ms.date ;
+
+
+
+SELECT da.Id,AVG(Total_Steps) AS AvgSteps, AVG(Sedentary_Minutes) AS AvgSleep
+FROM  bellabeat-analysis-458115.BellaBeat_Data.daily_activities as da
+JOIN 
+bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
+ON da.Id = ms.Id AND da.Activity_Date = ms.date
+GROUP BY da.Id;
+
+
+SELECT FORMAT_DATE('%A', CAST(Activity_Date AS DATE)) AS DayOfWeek,
+       AVG(Sedentary_Minutes) AS AvgSleep
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities
+GROUP BY DayOfWeek;
+
+SELECT Id, COUNT(DISTINCT Activity_Date) AS DaysTracked
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities
+GROUP BY Id;
+
+SELECT da.Id, COUNT(*) AS FullTrackingDays
+FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities as da
+JOIN 
+bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
+ON da.Id = ms.Id AND da.Activity_Date = ms.date
+GROUP BY da.Id;  ```
+
+
