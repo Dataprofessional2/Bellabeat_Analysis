@@ -105,3 +105,18 @@ Tableau – Visualization creation and data storytelling
 - Is there a pattern between heart rate, movement, and sleep?
 
 - Which users show consistent engagement or inactivity?
+
+
+## Data Analysis using SQL
+###Including some code features I worked with.
+
+```sql
+-- Select statements to access specific tables
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity ;
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Hourly_Calorie ;
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Hourly_Steps ;
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep ;
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities;
+SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.minutes_mets ;
+```
