@@ -241,7 +241,8 @@ bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
 ON da.Id = ms.Id AND da.Activity_Date = ms.date ;
 
 
-
+-- This query calculates the average number of steps and average sedentary minutes (used here as a proxy for sleep)
+-- for each user, by joining daily activity and sleep data using user ID and date.
 SELECT da.Id,AVG(Total_Steps) AS AvgSteps, AVG(Sedentary_Minutes) AS AvgSleep
 FROM  bellabeat-analysis-458115.BellaBeat_Data.daily_activities as da
 JOIN 
@@ -249,21 +250,26 @@ bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
 ON da.Id = ms.Id AND da.Activity_Date = ms.date
 GROUP BY da.Id;
 
-
+-- This query calculates the average sedentary minutes for each day of the week.
+-- It helps understand whether users are more or less sedentary on weekdays vs weekends.
 SELECT FORMAT_DATE('%A', CAST(Activity_Date AS DATE)) AS DayOfWeek,
        AVG(Sedentary_Minutes) AS AvgSleep
 FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities
 GROUP BY DayOfWeek;
 
+-- This query calculates how many distinct days each user tracked activity data.
+-- It's a measure of user engagement and consistency.
 SELECT Id, COUNT(DISTINCT Activity_Date) AS DaysTracked
 FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities
 GROUP BY Id;
 
+-- This query finds out how many days each user tracked both their activity and sleep data.
+-- Useful for identifying fully engaged users.
 SELECT da.Id, COUNT(*) AS FullTrackingDays
 FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities as da
 JOIN 
 bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
 ON da.Id = ms.Id AND da.Activity_Date = ms.date
-GROUP BY da.Id;  ```
+GROUP BY da.Id;  
 
 
