@@ -120,3 +120,26 @@ SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.Weight_Log_Info;
 SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.daily_activities;
 SELECT * FROM bellabeat-analysis-458115.BellaBeat_Data.minutes_mets ;
 ```
+```sql
+# Summary stats of hourly intensity table
+select max(Average_Intensity) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity as Max_hourly_Intensity ;
+select count(*) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity 
+group by Average_Intensity;
+select avg(Average_Intensity) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity as Average_hourly_Intensity ;
+select * from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity
+order by Average_Intensity;
+Select MAX(Total_Intensity) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity;
+select avg(Total_Intensity) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity;
+select min(Total_Intensity) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity;
+select count(Id) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity;
+select count(distinct Id) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity;
+select count(Id) from bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity
+group by Activity_Time
+order by Activity_Time desc;
+SELECT 
+  CAST(Activity_Time AS TIME) AS activity_time_casted,
+  COUNT(Id) AS count
+FROM bellabeat-analysis-458115.BellaBeat_Data.Hour_Intensity
+GROUP BY activity_time_casted
+ORDER BY activity_time_casted DESC;
+```
