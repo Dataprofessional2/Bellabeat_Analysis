@@ -271,5 +271,106 @@ JOIN
 bellabeat-analysis-458115.BellaBeat_Data.Minutes_Sleep as ms
 ON da.Id = ms.Id AND da.Activity_Date = ms.date
 GROUP BY da.Id;  
+```
+
+
+### Bellabeat Market Analysis Summary in R
+
+```r
+# Step 1: Install Required Packages 
+install.packages("lubridate")
+install.packages("ggplot2")
+install.packages("tidyr")
+install.packages("dplyr")
+```
+```r
+# Step 2: Load Libraries 
+library(lubridate)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+```
+```r
+# Checking if our file exists into the system
+file.exists("D://Google_capstone_2//project_files//project_org_file//eleven_project_file/dailyActivity_merged.csv")
+
+#Importing our csv data
+Daily_Activity <- read.csv("D://Google_capstone_2//project_files//project_org_file//eleven_project_file/dailyActivity_merged.csv")
+
+# Sleep Data
+file.exists("D://Google_capstone_2//project_files//project_org_file//eleven_project_file//minuteSleep_merged.csv")
+Sleep_Data <- read.csv("D://Google_capstone_2//project_files//project_org_file//eleven_project_file//minuteSleep_merged.csv")
+```
+```r
+#Viewing Data
+View(Sleep_Data)
+View(Daily_Activity)
+
+#looking at column names to avoid case sensitive error
+colnames(Daily_Activity)
+
+#converting to df
+Df=data.frame(Daily_Activity)
+print(Df)
+```
+```r
+#Standardising data
+Daily_Activity <- Daily_Activity %>%
+  mutate(ActivityDate = mdy(ActivityDate))
+
+Sleep_Data <- Sleep_Data %>%
+  mutate(date = mdy(date))
+```
+```r
+Daily_Activity <- Daily_Activity %>%
+  mutate(
+    Weekday = weekdays(ActivityDate),
+    Month = month(ActivityDate, label = TRUE, abbr = TRUE)
+  )
+
+Daily_Activity %>%
+  group_by(Weekday) %>%
+  summarise(AverageSteps = mean(TotalSteps))
+```
+```r
+#  Average steps by weekday
+Daily_Activity %>%
+  group_by(Weekday) %>%
+  summarise(AverageSteps = mean(TotalSteps)) %>%
+  arrange(match(Weekday, c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")))
+```
+```r
+#Establishing joins
+Combined_Data <- Daily_Activity %>%
+  inner_join(Sleep_Data, by = c("Id" = "Id", "ActivityDate" = "date"))
+```
+```r
+#  Average sleep on weekends vs weekdays
+Combined_Data %>%
+  mutate(Weekend = ifelse(Weekday %in% c("Saturday", "Sunday"), "Weekend", "Weekday")) %>%
+  group_by(Weekend) %>%
+  summarise(AvgSleep = mean(SedentaryMinutes))
+
+# Correlation between steps and calories
+Daily_Activity %>%
+  summarise(correlation = cor(TotalSteps, Calories, use = "complete.obs"))
+```
+```r
+# Illustrative Visualisations in R
+Daily_Activity %>%
+  group_by(Weekday) %>%
+  summarise(AverageSteps = mean(TotalSteps)) %>%
+  ggplot(aes(x = Weekday, y = AverageSteps, fill = Weekday)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Steps by Weekday", x = "Day", y = "Steps") +
+  theme_minimal()
+```
+```r
+ggplot(Daily_Activity, aes(x = VeryActiveMinutes, y = SedentaryMinutes)) +
+  geom_point(alpha = 0.6, color = "purple") +
+  labs(title = "Activity vs Sleep Duration", x = "Very Active Minutes", y = "SedentaryMinutes") +
+  theme_minimal()
+```
+
 
 
