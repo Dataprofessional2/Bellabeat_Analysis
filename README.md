@@ -372,5 +372,31 @@ ggplot(Daily_Activity, aes(x = VeryActiveMinutes, y = SedentaryMinutes)) +
   theme_minimal()
 ```
 
+## Key Findings from the Fitbit Daily Activity Project
 
+1. Strong Correlation Between Steps and Calories
+The scatter plot and line charts show a positive correlation: as total steps increase, calories burned also increase.
+Suggests steps are a good predictor of energy expenditure.
+
+2. Weekday Activity Patterns
+From the weekday line chart:
+Some days (like Tuesday or Thursday) may consistently show higher step counts.
+Weekends (Saturday/Sunday) may have either a drop or rise, depending on user lifestyle (e.g., more free time = more activity, or rest days).
+Insight: users follow consistent weekday routines, which can inform fitness plans.
+
+3. Total Steps Vary Significantly Across Days
+High variance in daily steps across different days shows that user activity is not uniform.
+Implication: motivation or schedule factors affect consistency.
+
+4. Potential Underutilization of Very Active Minutes
+If plotted, Very Active Minutes may be low despite high step counts — suggesting low-intensity walking dominates.
+Fitness plans may need to promote higher-intensity sessions.
+
+## Recommendations
+
+Product Feature Improvements
+Personalized Marketing Strategy
+Wellness-Focused Campaigns
+Conclusion
+Summary of Findings and Business Value
 
